@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rafael Barbosa | Analista de Dados</title>
+  <style>
+    :root {
+      --ink: #101513;
+      --night: #101513;
+      --paper: #f4efe5;
+      --cream: #fffaf0;
+      --muted: #6b7871;
+      --line: rgba(16, 21, 19, 0.14);
+      --green: #1f6b4d;
+      --mint: #8dc6a3;
+      --brick: #bd563c;
+      --blue: #1f7ea5;
+      --plum: #5a2a73;
+      --shadow: 0 24px 70px rgba(12, 18, 16, 0.2);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    figure {
+      margin: 0;
+    }
+
+    .shell {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: fixed;
+      inset: 16px 0 auto;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 250, 240, 0.22);
+      border-radius: var(--radius);
+      color: var(--cream);
+      background: rgba(16, 21, 19, 0.48);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 7px;
+      color: var(--night);
+      background: var(--cream);
+      font-size: 0.8rem;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: rgba(255, 250, 240, 0.76);
+      font-size: 0.92rem;
+      font-weight: 800;
+    }
+
+    .nav a {
+      padding: 9px 10px;
+      border-radius: 7px;
+    }
+
+    .nav a:hover {
+      color: var(--cream);
+      background: rgba(255, 250, 240, 0.1);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+      color: var(--cream);
+      background:
+        linear-gradient(90deg, rgba(16, 21, 19, 0.94) 0%, rgba(16, 21, 19, 0.78) 36%, rgba(16, 21, 19, 0.2) 68%, rgba(16, 21, 19, 0.08) 100%),
+        linear-gradient(180deg, rgba(16, 21, 19, 0.08) 55%, rgba(16, 21, 19, 0.86) 100%),
+        url("rafael-barbosa.jpg.jpg") center right / cover no-repeat;
+      isolation: isolate;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(90deg, rgba(255, 250, 240, 0.06) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255, 250, 240, 0.05) 1px, transparent 1px);
+      background-size: 58px 58px;
+      mask-image: linear-gradient(90deg, #000 0%, rgba(0, 0, 0, 0.55) 45%, transparent 78%);
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(260px, 0.58fr);
+      gap: 42px;
+      align-items: end;
+      min-height: 100vh;
+      padding: 150px 0 54px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 20px;
+      color: var(--mint);
+      font-size: 0.82rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 42px;
+      height: 2px;
+      background: var(--brick);
+    }
+
+    h1 {
+      max-width: 780px;
+      margin: 0;
+      font-size: clamp(3.6rem, 9vw, 8.2rem);
+      line-height: 0.86;
+      letter-spacing: 0;
+    }
+
+    .hero-copy {
+      max-width: 650px;
+      margin: 28px 0 0;
+      color: rgba(255, 250, 240, 0.78);
+      font-size: clamp(1.08rem, 1.7vw, 1.32rem);
+      line-height: 1.64;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border: 1px solid rgba(255, 250, 240, 0.2);
+      border-radius: var(--radius);
+      color: var(--cream);
+      background: rgba(255, 250, 240, 0.08);
+      font-weight: 900;
+      backdrop-filter: blur(14px);
+    }
+
+    .btn.primary {
+      color: var(--night);
+      background: var(--cream);
+      border-color: var(--cream);
+    }
+
+    .btn.dark {
+      color: var(--cream);
+      background: var(--night);
+      border-color: var(--night);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      transition: transform 180ms ease;
+    }
+
+    .hero-panel {
+      align-self: end;
+      border: 1px solid rgba(255, 250, 240, 0.18);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(255, 250, 240, 0.08), transparent 42%),
+        rgba(16, 21, 19, 0.72);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      overflow: hidden;
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px;
+      border-bottom: 1px solid rgba(255, 250, 240, 0.13);
+    }
+
+    .panel-head span {
+      color: rgba(255, 250, 240, 0.62);
+      font-size: 0.82rem;
+    }
+
+    .panel-head strong {
+      display: block;
+      margin-top: 5px;
+      font-size: 1.25rem;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(255, 250, 240, 0.13);
+    }
+
+    .hero-metrics div {
+      min-height: 118px;
+      padding: 16px;
+      background: rgba(16, 21, 19, 0.72);
+    }
+
+    .hero-metrics strong {
+      display: block;
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    .hero-metrics span {
+      display: block;
+      margin-top: 10px;
+      color: rgba(255, 250, 240, 0.66);
+      font-size: 0.78rem;
+      line-height: 1.3;
+    }
+
+    .hero-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 14px 18px 18px;
+    }
+
+    .hero-panel-note {
+      padding: 14px 18px;
+      border-top: 1px solid rgba(255, 250, 240, 0.13);
+      color: rgba(255, 250, 240, 0.68);
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+
+    .pill {
+      padding: 8px 10px;
+      border: 1px solid rgba(255, 250, 240, 0.16);
+      border-radius: 999px;
+      color: rgba(255, 250, 240, 0.74);
+      background: rgba(255, 250, 240, 0.07);
+      font-size: 0.78rem;
+      font-weight: 850;
+    }
+
+    .intro-band {
+      background: var(--night);
+      color: var(--cream);
+      border-top: 1px solid rgba(255, 250, 240, 0.12);
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      padding: 0 0 72px;
+      background: rgba(255, 250, 240, 0.12);
+    }
+
+    .intro-item {
+      min-height: 262px;
+      padding: 28px;
+      background: var(--night);
+    }
+
+    .intro-item small {
+      color: var(--mint);
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .intro-item p {
+      margin: 24px 0 0;
+      color: rgba(255, 250, 240, 0.72);
+      font-size: 1.08rem;
+      line-height: 1.62;
+    }
+
+    .intro-item h3 {
+      margin: 14px 0 0;
+      color: var(--cream);
+      font-size: 1.34rem;
+      line-height: 1.1;
+    }
+
+    section {
+      padding: 84px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 28px;
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(2.3rem, 5vw, 4.9rem);
+      line-height: 0.95;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      max-width: 520px;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.68;
+    }
+
+    .profile {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+      gap: 34px;
+      align-items: start;
+    }
+
+    .profile-copy {
+      font-size: clamp(1.35rem, 2.4vw, 2.2rem);
+      line-height: 1.22;
+      font-weight: 850;
+    }
+
+    .profile-copy p {
+      margin: 0;
+    }
+
+    .profile-copy span {
+      color: var(--green);
+    }
+
+    .contact-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .contact-row {
+      display: grid;
+      grid-template-columns: 132px 1fr;
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .contact-row strong {
+      color: var(--ink);
+    }
+
+    .project-band {
+      background:
+        radial-gradient(circle at 18% 0%, rgba(189, 86, 60, 0.16), transparent 32%),
+        linear-gradient(180deg, #f4efe5, #ebe3d6);
+    }
+
+    .project-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 26px;
+      align-items: start;
+    }
+
+    .project-copy {
+      position: sticky;
+      top: 104px;
+      padding: 28px 0;
+    }
+
+    .project-copy h3 {
+      margin: 0;
+      font-size: clamp(2rem, 3.6vw, 3.4rem);
+      line-height: 0.98;
+    }
+
+    .project-copy p {
+      max-width: 520px;
+      color: #4c5a54;
+      line-height: 1.72;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 22px 0 28px;
+    }
+
+    .tag {
+      padding: 8px 10px;
+      border-radius: 999px;
+      color: var(--night);
+      background: rgba(31, 107, 77, 0.12);
+      font-size: 0.82rem;
+      font-weight: 900;
+    }
+
+    .case-numbers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .case-numbers div {
+      min-height: 104px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 250, 240, 0.58);
+    }
+
+    .case-numbers strong {
+      display: block;
+      font-size: 1.7rem;
+      line-height: 1;
+    }
+
+    .case-numbers span {
+      display: block;
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.3;
+    }
+
+    .chart-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .chart-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: 0 18px 48px rgba(16, 21, 19, 0.09);
+    }
+
+    .chart-card.large img {
+      aspect-ratio: 16 / 8;
+    }
+
+    .chart-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .chart-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .chart-row .chart-card img {
+      aspect-ratio: 16 / 10;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .project-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 330px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--cream);
+      box-shadow: 0 18px 48px rgba(16, 21, 19, 0.09);
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      transition: transform 180ms ease;
+    }
+
+    .project-card.pending {
+      cursor: default;
+      background:
+        linear-gradient(135deg, rgba(31, 107, 77, 0.1), transparent 44%),
+        var(--cream);
+    }
+
+    .project-card.pending:hover {
+      transform: none;
+    }
+
+    .project-thumb {
+      height: 178px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .project-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .project-card-body {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 18px;
+    }
+
+    .project-card small {
+      color: var(--green);
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .project-card h3 {
+      margin: 12px 0 10px;
+      font-size: 1.35rem;
+      line-height: 1.08;
+    }
+
+    .project-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .project-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 18px;
+      color: var(--ink);
+      font-weight: 900;
+    }
+
+    .project-card-footer span:last-child {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      color: var(--cream);
+      background: var(--night);
+    }
+
+    .project-status {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 12px;
+      padding: 7px 9px;
+      border-radius: 999px;
+      color: var(--green);
+      background: rgba(31, 107, 77, 0.12);
+      font-size: 0.74rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .pending-visual {
+      display: grid;
+      place-items: center;
+      height: 178px;
+      color: rgba(255, 250, 240, 0.82);
+      background:
+        linear-gradient(135deg, rgba(16, 21, 19, 0.88), rgba(31, 107, 77, 0.84)),
+        repeating-linear-gradient(90deg, rgba(255, 250, 240, 0.14) 0 1px, transparent 1px 18px);
+      font-size: 2.4rem;
+      font-weight: 900;
+    }
+
+    .project-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      padding: 20px;
+      overflow: auto;
+      background: rgba(16, 21, 19, 0.74);
+      backdrop-filter: blur(10px);
+    }
+
+    .project-modal:target {
+      display: block;
+    }
+
+    .modal-dialog {
+      width: min(1120px, 100%);
+      margin: 44px auto;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .modal-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 16px 18px;
+      color: var(--cream);
+      background: var(--night);
+    }
+
+    .modal-top strong {
+      font-size: 1rem;
+    }
+
+    .modal-close {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      background: rgba(255, 250, 240, 0.1);
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    .modal-body {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+      gap: 26px;
+      padding: 28px;
+    }
+
+    .modal-info h3 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.7rem);
+      line-height: 0.96;
+    }
+
+    .modal-info p {
+      color: #4c5a54;
+      line-height: 1.72;
+    }
+
+    .modal-facts {
+      display: grid;
+      gap: 10px;
+      margin: 22px 0;
+    }
+
+    .modal-fact {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 250, 240, 0.58);
+    }
+
+    .modal-fact strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .modal-fact span {
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .modal-gallery {
+      display: grid;
+      gap: 12px;
+    }
+
+    .modal-gallery-main,
+    .modal-gallery-grid figure {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .modal-gallery-main img {
+      width: 100%;
+      aspect-ratio: 16 / 8;
+      object-fit: cover;
+    }
+
+    .modal-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .modal-gallery-grid img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+    }
+
+    .certifications {
+      background: var(--paper);
+    }
+
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .cert-card {
+      position: relative;
+      min-height: 330px;
+      overflow: hidden;
+      padding: 24px;
+      border-radius: var(--radius);
+      color: var(--cream);
+      background:
+        radial-gradient(circle at 18% 12%, rgba(236, 22, 111, 0.42), transparent 30%),
+        radial-gradient(circle at 88% 84%, rgba(141, 198, 163, 0.14), transparent 30%),
+        #070908;
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .cert-card::before {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      z-index: -1;
+      background:
+        repeating-linear-gradient(115deg, transparent 0 18px, rgba(236, 22, 111, 0.18) 19px 20px),
+        repeating-linear-gradient(65deg, transparent 0 24px, rgba(255, 250, 240, 0.06) 25px 26px);
+      opacity: 0.42;
+      transform: rotate(-5deg);
+    }
+
+    .cert-card small {
+      color: #ff4c9a;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .cert-card h3 {
+      margin: 30px 0 14px;
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      line-height: 0.98;
+    }
+
+    .cert-card p {
+      max-width: 520px;
+      color: rgba(255, 250, 240, 0.72);
+      line-height: 1.6;
+    }
+
+    .cert-meta {
+      display: grid;
+      gap: 0;
+      margin-top: 24px;
+      border-top: 1px solid rgba(255, 250, 240, 0.16);
+    }
+
+    .cert-meta div {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(255, 250, 240, 0.16);
+      color: rgba(255, 250, 240, 0.72);
+    }
+
+    .cert-meta strong {
+      color: var(--cream);
+    }
+
+    .formation-card {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      gap: 28px;
+      align-items: center;
+      margin-top: 14px;
+      padding: 28px;
+      border-radius: var(--radius);
+      color: var(--cream);
+      background: linear-gradient(135deg, #087bb3, #0a93ca);
+      box-shadow: var(--shadow);
+    }
+
+    .formation-logo {
+      display: grid;
+      place-items: center;
+      min-height: 210px;
+      border: 1px solid rgba(255, 250, 240, 0.24);
+      border-radius: var(--radius);
+      font-size: clamp(2.4rem, 5vw, 5rem);
+      font-weight: 900;
+      font-style: italic;
+    }
+
+    .formation-card small {
+      color: rgba(255, 250, 240, 0.78);
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .formation-card h3 {
+      margin: 12px 0 12px;
+      font-size: clamp(2rem, 4vw, 3.8rem);
+      line-height: 0.96;
+    }
+
+    .formation-card p {
+      color: rgba(255, 250, 240, 0.82);
+      line-height: 1.65;
+    }
+
+    .skills-band {
+      color: var(--cream);
+      background: var(--night);
+    }
+
+    .skills-band .section-head p {
+      color: rgba(255, 250, 240, 0.62);
+    }
+
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255, 250, 240, 0.14);
+    }
+
+    .skill {
+      min-height: 245px;
+      padding: 24px;
+      background: var(--night);
+    }
+
+    .skill::before {
+      content: "";
+      display: block;
+      width: 42px;
+      height: 4px;
+      margin-bottom: 24px;
+      border-radius: 999px;
+      background: var(--mint);
+    }
+
+    .skill:nth-child(2)::before {
+      background: var(--blue);
+    }
+
+    .skill:nth-child(3)::before {
+      background: var(--brick);
+    }
+
+    .skill:nth-child(4)::before {
+      background: #c89add;
+    }
+
+    .skill h3 {
+      margin: 0 0 14px;
+      font-size: 1.24rem;
+    }
+
+    .skill p {
+      margin: 0;
+      color: rgba(255, 250, 240, 0.62);
+      line-height: 1.62;
+    }
+
+    .next-project {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      margin-top: 1px;
+      padding: 24px;
+      color: rgba(255, 250, 240, 0.68);
+      background: rgba(255, 250, 240, 0.06);
+    }
+
+    .next-project strong {
+      display: block;
+      color: var(--cream);
+      font-size: 1.2rem;
+    }
+
+    .contact-section {
+      background: var(--paper);
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+      gap: 36px;
+      align-items: center;
+    }
+
+    .contact-title {
+      font-size: clamp(2.7rem, 6vw, 5.9rem);
+      line-height: 0.9;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .contact-box {
+      border-top: 1px solid var(--line);
+    }
+
+    .footer {
+      padding: 26px 0 38px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 900px) {
+      .topbar {
+        position: absolute;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .hero {
+        background:
+          linear-gradient(180deg, rgba(16, 21, 19, 0.32) 0%, rgba(16, 21, 19, 0.82) 48%, rgba(16, 21, 19, 0.98) 100%),
+          url("rafael-barbosa.jpg.jpg") 68% center / cover no-repeat;
+      }
+
+      .hero-inner,
+      .profile,
+      .project-layout,
+      .contact-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-inner {
+        align-items: end;
+        padding-top: 420px;
+      }
+
+      .project-copy {
+        position: static;
+        padding-top: 0;
+      }
+
+      .intro-grid,
+      .projects-grid,
+      .cert-grid,
+      .formation-card,
+      .skill-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head p {
+        margin-top: 14px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hero-inner {
+        padding-top: 380px;
+      }
+
+      .hero-panel {
+        display: none;
+      }
+
+      .case-numbers,
+      .chart-row,
+      .modal-body,
+      .modal-gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cert-meta div {
+        display: block;
+      }
+
+      .contact-row {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+
+      .next-project {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Rafael Barbosa">
+      <span class="brand-mark">RB</span>
+      <span>Rafael Barbosa</span>
+    </a>
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="#sobre">Sobre</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#certificacoes">Certificações</a>
+      <a href="#habilidades">Stack</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
+
+  <main id="inicio">
+    <section class="hero">
+      <div class="shell hero-inner">
+        <div>
+          <p class="eyebrow">Analista de Dados | Taboão da Serra - SP</p>
+          <h1>Transformo dados em decisões.</h1>
+          <p class="hero-copy">
+            Sou Rafael Barbosa. Construo análises, dashboards e narrativas visuais para revelar padrões, medir performance e apoiar decisões com clareza.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#projetos">Ver projetos</a>
+            <a class="btn" href="mailto:rafaelbarbosadsgg@gmail.com">Falar comigo</a>
+          </div>
+        </div>
+
+        <aside class="hero-panel" aria-label="Resumo profissional">
+          <div class="panel-head">
+            <div>
+              <span>Foco</span>
+              <strong>Business Intelligence</strong>
+            </div>
+            <div>
+              <span>Base</span>
+              <strong>Python + SQL</strong>
+            </div>
+          </div>
+          <div class="hero-metrics">
+            <div>
+              <strong>4</strong>
+              <span>projetos no portfolio</span>
+            </div>
+            <div>
+              <strong>4</strong>
+              <span>cursos e formações</span>
+            </div>
+            <div>
+              <strong>3</strong>
+              <span>certificações concluídas</span>
+            </div>
+          </div>
+          <div class="hero-strip">
+            <span class="pill">Dashboards</span>
+            <span class="pill">KPIs</span>
+            <span class="pill">Pandas</span>
+            <span class="pill">Storytelling</span>
+          </div>
+          <div class="hero-panel-note">
+            Inclui 1 projeto publicado, 3 projetos em andamento, 115h certificadas e formação intensiva em andamento pela Generation Brasil.
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="intro-band">
+      <div class="shell intro-grid">
+        <article class="intro-item">
+          <small>01. Entendimento</small>
+          <h3>Problema e objetivo</h3>
+          <p>Alinho a pergunta de negócio, os indicadores esperados e o tipo de decisão que a análise precisa apoiar.</p>
+        </article>
+        <article class="intro-item">
+          <small>02. Preparação</small>
+          <h3>Base confiável</h3>
+          <p>Consolido arquivos, trato inconsistências, cruzo tabelas e valido se os dados sustentam a análise.</p>
+        </article>
+        <article class="intro-item">
+          <small>03. Análise</small>
+          <h3>KPIs e padrões</h3>
+          <p>Crio métricas, comparo períodos, segmentos e categorias, e busco relações entre desempenho e operação.</p>
+        </article>
+        <article class="intro-item">
+          <small>04. Entrega</small>
+          <h3>Visual e recomendação</h3>
+          <p>Apresento gráficos, conclusões e próximos passos para que a análise vire ação prática.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <div class="shell">
+        <div class="section-head">
+          <h2>Perfil</h2>
+          <p>Dados precisam ser úteis antes de serem bonitos. O visual entra para deixar a decisão mais rápida.</p>
+        </div>
+
+        <div class="profile">
+          <div class="profile-copy">
+            <p>
+              Atuo com <span>análise de dados, BI e storytelling</span>, criando leituras claras para times que precisam entender desempenho, risco e oportunidade sem se perder em planilhas.
+            </p>
+          </div>
+
+          <div class="contact-list" aria-label="Dados pessoais">
+            <div class="contact-row">
+              <strong>Localização</strong>
+              <span>Taboão da Serra - SP</span>
+            </div>
+            <a class="contact-row" href="tel:+5511918290467">
+              <strong>Telefone</strong>
+              <span>(11) 91829-0467</span>
+            </a>
+            <a class="contact-row" href="mailto:rafaelbarbosadsgg@gmail.com">
+              <strong>Email</strong>
+              <span>rafaelbarbosadsgg@gmail.com</span>
+            </a>
+            <a class="contact-row" href="https://www.linkedin.com/in/rafaelbarbosa23" target="_blank" rel="noreferrer">
+              <strong>LinkedIn</strong>
+              <span>linkedin.com/rafaelbarbosa23</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projetos" class="project-band">
+      <div class="shell">
+        <div class="section-head">
+          <h2>Projetos</h2>
+          <p>Cases concluídos, organizados em cards. Clique em um projeto para ver detalhes, gráficos e o notebook.</p>
+        </div>
+
+        <div class="projects-grid" aria-label="Lista de projetos">
+          <a class="project-card" href="#projeto-home-decor">
+            <div class="project-thumb">
+              <img src="assets/projeto-home-decor-01.png" alt="Prévia do projeto NovaVista Home & Decor" />
+            </div>
+            <div class="project-card-body">
+              <span class="project-status">Publicado</span>
+              <small>Python | Pandas | Matplotlib</small>
+              <h3>NovaVista Home & Decor</h3>
+              <p>Análise de vendas, margem, atrasos, devoluções e desempenho no primeiro trimestre.</p>
+              <div class="project-card-footer">
+                <span>Ver projeto</span>
+                <span aria-hidden="true">+</span>
+              </div>
+            </div>
+          </a>
+
+          <article class="project-card pending">
+            <div class="pending-visual">BI</div>
+            <div class="project-card-body">
+              <span class="project-status">Em andamento</span>
+              <small>Power BI | KPIs | Dashboard</small>
+              <h3>Dashboard Comercial</h3>
+              <p>Projeto em construção para acompanhar vendas, metas, ticket médio e performance por período.</p>
+              <div class="project-card-footer">
+                <span>Em breve</span>
+                <span aria-hidden="true">…</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card pending">
+            <div class="pending-visual">SQL</div>
+            <div class="project-card-body">
+              <span class="project-status">Em andamento</span>
+              <small>SQL | Modelagem | Qualidade</small>
+              <h3>Base de Indicadores</h3>
+              <p>Projeto em construção para estruturar consultas, regras de negócio e validações de dados.</p>
+              <div class="project-card-footer">
+                <span>Em breve</span>
+                <span aria-hidden="true">…</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card pending">
+            <div class="pending-visual">PY</div>
+            <div class="project-card-body">
+              <span class="project-status">Em andamento</span>
+              <small>Python | Pandas | Visualização</small>
+              <h3>Análise Exploratória</h3>
+              <p>Projeto em construção para investigar padrões, segmentações e oportunidades em uma base analítica.</p>
+              <div class="project-card-footer">
+                <span>Em breve</span>
+                <span aria-hidden="true">…</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div id="projeto-home-decor" class="project-modal" role="dialog" aria-modal="true" aria-labelledby="home-decor-title">
+      <div class="modal-dialog">
+        <div class="modal-top">
+          <strong>Projeto | NovaVista Home & Decor</strong>
+          <a class="modal-close" href="#projetos" aria-label="Fechar projeto">×</a>
+        </div>
+
+        <div class="modal-body">
+          <div class="modal-info">
+            <p class="eyebrow">Case de análise de dados</p>
+            <h3 id="home-decor-title">Crescimento, rentabilidade e qualidade operacional.</h3>
+            <p>
+              Notebook criado para analisar o primeiro trimestre de uma empresa de varejo de móveis e decoração. O projeto consolida bases, cruza clientes, produtos e vendas, e usa gráficos para avaliar faturamento, margem, atrasos, avaliações e devoluções.
+            </p>
+
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">Pandas</span>
+              <span class="tag">Matplotlib</span>
+              <span class="tag">KPIs</span>
+              <span class="tag">Análise exploratória</span>
+            </div>
+
+            <div class="modal-facts">
+              <div class="modal-fact">
+                <strong>Objetivo</strong>
+                <span>Identificar se o aumento de faturamento veio acompanhado de perda de margem e piora operacional.</span>
+              </div>
+              <div class="modal-fact">
+                <strong>Entregáveis</strong>
+                <span>KPIs, tabelas resumo, gráficos e recomendações para orientar decisões do negócio.</span>
+              </div>
+              <div class="modal-fact">
+                <strong>Principais leituras</strong>
+                <span>Faturamento por período, lucro e margem por categoria, atrasos relacionados a avaliação e devolução, cidades e vendedores com maior faturamento.</span>
+              </div>
+            </div>
+
+            <a class="btn dark" href="https://github.com/rrafaelbarbosa/Projeto_Home_e_Decor/blob/main/Untitled9.ipynb" target="_blank" rel="noreferrer">Abrir notebook no GitHub</a>
+          </div>
+
+          <div class="modal-gallery" aria-label="Gráficos do projeto">
+            <figure class="modal-gallery-main">
+              <img src="assets/projeto-home-decor-01.png" alt="Faturamento diário ao longo do primeiro trimestre" />
+            </figure>
+            <div class="modal-gallery-grid">
+              <figure>
+                <img src="assets/projeto-home-decor-02.png" alt="Lucro bruto por categoria de produto" />
+              </figure>
+              <figure>
+                <img src="assets/projeto-home-decor-03.png" alt="Margem percentual média por categoria de produto" />
+              </figure>
+              <figure>
+                <img src="assets/projeto-home-decor-05.png" alt="Atraso na entrega por avaliação e devolução" />
+              </figure>
+              <figure>
+                <img src="assets/projeto-home-decor-06.png" alt="Faturamento total por cidade" />
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="certificacoes" class="certifications">
+      <div class="shell">
+        <div class="section-head">
+          <h2>Certificações</h2>
+          <p>Cursos concluídos na FIAP, com foco em análise, BI e fundamentos para trabalhar com dados em contexto de negócio.</p>
+        </div>
+
+        <div class="cert-grid">
+          <article class="cert-card">
+            <small>FIAP | Nano Course</small>
+            <h3>Big Data & Analytics</h3>
+            <p>
+              Formação complementar voltada a conceitos e práticas de análise de dados em ambientes com grande volume de informação.
+            </p>
+            <div class="cert-meta">
+              <div>
+                <strong>Carga horária</strong>
+                <span>60 horas</span>
+              </div>
+              <div>
+                <strong>Conclusão</strong>
+                <span>24 de abril de 2026</span>
+              </div>
+              <div>
+                <strong>Instituição</strong>
+                <span>FIAP - Centro Universitário</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="cert-card">
+            <small>FIAP | Nano Course</small>
+            <h3>Business Intelligence (BI)</h3>
+            <p>
+              Curso focado em inteligência de negócios, leitura de indicadores e uso de dados para apoiar decisões gerenciais.
+            </p>
+            <div class="cert-meta">
+              <div>
+                <strong>Carga horária</strong>
+                <span>40 horas</span>
+              </div>
+              <div>
+                <strong>Conclusão</strong>
+                <span>19 de abril de 2026</span>
+              </div>
+              <div>
+                <strong>Instituição</strong>
+                <span>FIAP - Centro Universitário</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="cert-card">
+            <small>Comunidade DS | Formação Profissional</small>
+            <h3>Excel</h3>
+            <p>
+              Curso de capacitação profissional em Excel, reforçando fundamentos para organização, análise e manipulação de dados em planilhas.
+            </p>
+            <div class="cert-meta">
+              <div>
+                <strong>Carga horária</strong>
+                <span>15 horas</span>
+              </div>
+              <div>
+                <strong>Emissão</strong>
+                <span>19 de abril de 2026</span>
+              </div>
+              <div>
+                <strong>Instituição</strong>
+                <span>Comunidade DS</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <article class="formation-card">
+          <div class="formation-logo">Generation<br />Brasil</div>
+          <div>
+            <small>Em andamento</small>
+            <h3>Formação Intensiva em Análise de Dados</h3>
+            <p>
+              Formação em andamento pela Generation Brasil, com foco no desenvolvimento prático de competências para análise de dados, resolução de problemas, tecnologia e atuação profissional.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="habilidades" class="skills-band">
+      <div class="shell">
+        <div class="section-head">
+          <h2>Stack</h2>
+          <p>Ferramentas e competências para ir da base bruta até uma apresentação clara.</p>
+        </div>
+
+        <div class="skill-grid">
+          <article class="skill">
+            <h3>SQL e modelagem</h3>
+            <p>Consultas, joins, estruturação de tabelas e preparação de dados para análise.</p>
+          </article>
+          <article class="skill">
+            <h3>Dashboards e BI</h3>
+            <p>Indicadores para acompanhar metas, vendas, operação, margem e qualidade.</p>
+          </article>
+          <article class="skill">
+            <h3>Python analítico</h3>
+            <p>Pandas, exploração de dados, notebooks, gráficos e validação de hipóteses.</p>
+          </article>
+          <article class="skill">
+            <h3>Storytelling</h3>
+            <p>Comunicação simples para transformar análise técnica em decisão de negócio.</p>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="contato" class="contact-section">
+      <div class="shell contact-wrap">
+        <div>
+          <p class="eyebrow">Contato</p>
+          <div class="contact-title">Vamos falar sobre dados.</div>
+        </div>
+
+        <div class="contact-box">
+          <a class="contact-row" href="mailto:rafaelbarbosadsgg@gmail.com">
+            <strong>Email</strong>
+            <span>rafaelbarbosadsgg@gmail.com</span>
+          </a>
+          <a class="contact-row" href="tel:+5511918290467">
+            <strong>Telefone</strong>
+            <span>(11) 91829-0467</span>
+          </a>
+          <a class="contact-row" href="https://www.linkedin.com/in/rafaelbarbosa23" target="_blank" rel="noreferrer">
+            <strong>LinkedIn</strong>
+            <span>linkedin.com/rafaelbarbosa23</span>
+          </a>
+          <div class="contact-row">
+            <strong>Localização</strong>
+            <span>Taboão da Serra - SP</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell">Rafael Barbosa | Analista de Dados</div>
+  </footer>
+</body>
+</html>
